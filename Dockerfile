@@ -15,4 +15,4 @@ RUN pip install -r /tmp/requirements.txt
 
 COPY app/ .
 
-RUN ["uvicorn", "app.main_api:app", "--host", "0.0.0.0", "--port", "8000", "--preload"]
+CMD ["uvicorn", "main_api:app", "--host", "0.0.0.0", "--port", "8000"]
