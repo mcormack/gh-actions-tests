@@ -16,7 +16,6 @@ RUN pip install -r /tmp/requirements.txt
 COPY app/ .
 COPY tests/ .
 
-
 EXPOSE 8000
 
 CMD ["uvicorn", "main_api:app", "--host", "0.0.0.0", "--port", "8000"]
