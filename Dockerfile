@@ -1,4 +1,4 @@
-FROM python3.14.2-alpine AS builder
+FROM python:3.14.2-alpine AS builder
 
 RUN apt-get update && apt-get install -y curl
 
