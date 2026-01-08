@@ -1,6 +1,6 @@
 name: Zoro
-
 config:
-   - name: Roronoa
-   - type: Swordsman
-   - isCool: true
+  - name: Roronoa
+  - type: Swordsman
+  - isCool: true
+isCool: true
