@@ -1,4 +1,4 @@
-name: Toggle Json Boolean Value
+name: Toggle YAML Boolean Value
 
 on: 
   workflow_dispatch: # Manual Trigger
