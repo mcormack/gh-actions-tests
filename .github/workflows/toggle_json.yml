@@ -19,7 +19,8 @@ jobs:
           |
           # File Path
           # yq command to handle Yaml files, -i: inplace
-          yq -i '.config[0].isCool = (.config[0].isCool | not)' ./settings_files/sample.yaml
+          yq -i '(.config[] | select(.name == "Roronoa") | .isCool) |= not' ./settings_files/sample.yaml
+          # yq -i '.config[].isCool |= not' config.yml # --> ALL Characters with Is Cool will change
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v8
