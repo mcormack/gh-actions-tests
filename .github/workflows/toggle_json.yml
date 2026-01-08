@@ -1,0 +1,34 @@
+name: Toggle JSON Boolean Value
+
+on: 
+  workflow_dispatch: # Manual Trigger
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  toggle-yaml-flag:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Toggle Value (Boolean) Field in JSON
+        run:
+          |
+          # Targets "Value" and flips it
+          # |=: The "update" operator, !. represent NOT -> current value, then dump output to a file.
+          jq '.Value |= !.' ./settings_files/sample.json > temp.json && mv temp.json ./settings_files/sample.json
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v8
+        with:
+          commit-message: "Toggle Value status"
+          title: "Automatic Toggle of Value Flag"
+          body: "PR generated automatically but triggered manualy to Toggle Value flag"
+          branch: "auto/toggle-json"
+          delete-branch: true
+
+
+  
