@@ -2,4 +2,4 @@ name: Zoro
 config:
   - name: Roronoa
     type: Swordsman
-    isCool: true
+    isCool: false
