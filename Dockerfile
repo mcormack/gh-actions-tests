@@ -11,7 +11,7 @@ WORKDIR /app
 COPY requirements.txt /tmp/requirements.txt
 
 # RUN within_container_while_building
-RUN pip install -r /tmp/requirements.txt
+RUN pip install --no-cache-dir -r /tmp/requirements.txt
 
 COPY app/ .
 COPY tests/ .
