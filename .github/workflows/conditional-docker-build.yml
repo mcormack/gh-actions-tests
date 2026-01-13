@@ -1,0 +1,39 @@
+name: Conditional Docker Build
+
+on:
+#   push:
+#     branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch: # Manual Trigger
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v6
+    
+    - name: "Display Git Info"
+      run: |
+        echo "Branch: ${{ github.ref }}"
+        echo "Event: ${{ github.event_name }}"
+    
+    - name: "Build the Docker image"
+      # Only build on main branch pushes or manual trigger
+      # Skip during PR events
+      # if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+      if: github.event_name == 'workflow_dispatch'
+      run: docker build -t fastapi_sample:$(date +%s) .
+    
+    - name: "Build Docker image (Pull Request)"
+      # Build during PR to catch Docker issues early
+      if: github.event_name == 'pull_request'
+      run: docker build -t fastapi_sample:pr-check .
+    
+    - name: "Notify: Docker build skipped"
+      if: github.event_name == 'pull_request'
+      run: echo "Docker image built for PR validation only (not pushed)" 
