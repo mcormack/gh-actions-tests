@@ -22,7 +22,7 @@ jobs:
           jq '.Value |= not' ./settings_files/sample.json > temp.json && mv temp.json ./settings_files/sample.json
 
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v8
+        uses: peter-evans/create-pull-request@2271f1ddcf09437ed8f019733eb5cfba58ac76f0
         with:
           commit-message: "Toggle Value status"
           title: "Automatic Toggle of Value Flag"
